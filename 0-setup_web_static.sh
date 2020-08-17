@@ -8,6 +8,8 @@ touch /data/web_static/releases/test/index.html
 echo "Nginx test content" >> /data/web_static/releases/test/index.html
 ln -fs /data/web_static/releases/test/ /data/web_static/current
 chown -R ubuntu:ubuntu /data/
-# TODO: Add nginx config here. sed and alias
+find="^server {$"
+replace="server {\n\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}\n"
+sudo sed -i 's'"${find}"','"${replace}"',' /etc/nginx/sites-available/default
 sudo service nginx restart
 
