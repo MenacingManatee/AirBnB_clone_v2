@@ -17,6 +17,6 @@ sudo ln -fs /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 find="^server {$"
 replace="server {\n\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}\n"
-sudo sed -i 's'"${find}"','"${replace}"',' /etc/nginx/sites-available/default
+sudo sed -i 's,'"${find}"','"${replace}"',' /etc/nginx/sites-available/default
 sudo service nginx restart
 
