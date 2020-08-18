@@ -27,21 +27,26 @@ def do_deploy(archive_path):
     a_name = archive_path.split('/')[-1]
     d_name = a_name.split('.')[0]
     dwr = "/data/web_static/releases/"
+    suc = []
 
-    put(archive_path, '/tmp/')
-    run("mkdir -p " + dwr + d_name + '/')
-    run("tar -xzf /tmp/" + a_name + " -C " + dwr + d_name + '/')
-    run("rm /tmp/" + a_name)
-    run("mv " + dwr + d_name + "/web_static/* " + dwr + d_name + '/')
-    run("rm -rf " + dwr + d_name + '/web_static')
-    run("rm -rf /data/web_static/current")
-    run("ln -s " + dwr + d_name + '/ /data/web_static/current')
+    suc.append(put(archive_path, '/tmp/'))
+    suc.append(run("mkdir -p " + dwr + d_name + '/'))
+    suc.append(run("tar -xzf /tmp/" + a_name + " -C " + dwr + d_name + '/'))
+    suc.append(run("rm /tmp/" + a_name))
+    suc.append(run("mv " + dwr + d_name + "/web_static/* " + dwr + d_name +
+                   '/'))
+    suc.append(run("rm -rf " + dwr + d_name + '/web_static'))
+    suc.append(run("rm -rf /data/web_static/current"))
+    suc.append(run("ln -s " + dwr + d_name + '/ /data/web_static/current'))
+    for item in suc:
+        if not item.succeeded:
+            return False
     return True
 
 
 def deploy():
     '''creates and distributes an archive to your web servers'''
     pack = do_pack()
-    if pack[0] == False:
+    if not pack[0]:
         return False
     return do_deploy('versions/' + pack[1])
