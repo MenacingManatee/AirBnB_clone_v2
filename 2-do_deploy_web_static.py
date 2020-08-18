@@ -24,4 +24,3 @@ def do_deploy(archive_path):
     run("rm -rf /data/web_static/current")
     run("ln -s " + dwr + d_name + '/ /data/web_static/current')
     return True
-    
