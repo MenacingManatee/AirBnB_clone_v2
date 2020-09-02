@@ -37,17 +37,7 @@ def isInt(n):
 
 @app.route('/number_template/<int:n>')
 def num_template(n):
-    ret = '''<!DOCTYPE html>
-<HTML lang="en">
-    <HEAD>
-        <TITLE>HBNB</TITLE>
-    </HEAD>
-    <BODY>
-        <H1>Number: {}</H1>
-    </BODY>
-</HTML>
-'''.format(n)
-    return ret
+    return render_template("5-number.html", n=n)
 
 
 if __name__ == '__main__':
