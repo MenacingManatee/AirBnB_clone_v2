@@ -8,7 +8,7 @@ app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(x):
     from models import storage
     storage.close()
 
