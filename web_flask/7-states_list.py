@@ -7,6 +7,12 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 
+@app.teardown_appcontext
+def teardown():
+    from models import storage
+    storage.close()
+
+
 @app.route('/states_list')
 def states_list():
     '''lists all states as list items'''
