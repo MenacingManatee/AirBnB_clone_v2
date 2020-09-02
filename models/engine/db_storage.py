@@ -36,7 +36,7 @@ class DBStorage:
         if cls is None:
             res = []
             for clas in console.HBNBCommand.classes:
-                if clas != 'BaseModel':
+                if clas != BaseModel:
                     res.extend(self.__session.query(eval(clas)).all())
             res_dct = {}
             for obj in res:
@@ -44,7 +44,7 @@ class DBStorage:
                                 obj})
             return res_dct
         else:
-            d_list = (self.__session.query(eval(cls)).all())
+            d_list = (self.__session.query(cls).all())
             return ({obj.to_dict()['__class__'] + '.' + obj.id: obj for
                      obj in d_list})
 
