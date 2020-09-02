@@ -13,7 +13,8 @@ def states_list():
     from models import storage
     from models.state import State
     states = storage.all(State).values()
-    return render_template("7-states_list.html", states=sorted(states, key=lambda x: x.name))
+    return render_template("7-states_list.html", states=sorted(
+        states, key=lambda x: x.name))
 
 if __name__ == '__main__':
     app.run('0.0.0.0')
