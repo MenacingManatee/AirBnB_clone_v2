@@ -23,4 +23,5 @@ class State(BaseModel, Base):
         from models.city import City
 
         objs = storage.all(City).items()
-        return [obj for key, obj in objs if obj.state_id == self.id]
+        return sorted([obj for key, obj in objs if obj.state_id == self.id],
+                      key=lambda x: x.name)
