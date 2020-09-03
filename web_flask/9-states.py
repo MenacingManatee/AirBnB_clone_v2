@@ -42,11 +42,11 @@ def states(id=None):
     states = storage.all(State)
     if id is not None:
         states = states.get("State.{}".format(id))
-        return render_template('9-states.html', states=[states])
+        return render_template('9-states.html', states=states, cities=True)
     else:
         states = states.values()
         return render_template('9-states.html', states=sorted(
-            states, key=lambda x: x.name))
+            states, key=lambda x: x.name), cities=False)
 
 if __name__ == '__main__':
     app.run('0.0.0.0')
