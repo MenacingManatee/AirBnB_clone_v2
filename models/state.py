@@ -18,9 +18,9 @@ class State(BaseModel, Base):
         '''
         Returns a list of city objects with a state_id matching state.id
         '''
-        if getenv('HBNB_TYPE_STORAGE') != 'db':
-            from models import storage
-            from models.city import City
+        #if getenv('HBNB_TYPE_STORAGE') != 'db':
+        from models import storage
+        from models.city import City
 
-            objs = storage.all(City).items()
-            return [obj for key, obj in objs if obj.state_id == self.id]
+        objs = storage.all(City).items()
+        return [obj for key, obj in objs if obj.state_id == self.id]
